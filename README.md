@@ -1,4 +1,4 @@
-# electron-quick-start
+# File Encryptor Dectyptor using AES algorithm.
 
 **Clone and run for a quick way to see Electron in action.**
 
