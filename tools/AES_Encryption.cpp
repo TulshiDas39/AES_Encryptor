@@ -276,9 +276,10 @@ unsigned char* encrypt(unsigned char* message ){
         aes_encrypt(paddedMessage+i, aes_key);
     }
 
-    cout<<"Encrypted message:"<<endl;
+    //cout<<"Encrypted message:"<<endl;
     for(int i = 0; i < lenOfPaddedMessage; i++){
-        print_hex(paddedMessage[i]);
+        //print_hex(paddedMessage[i]);
+        cout<<paddedMessage[i];
         cout<<" ";
     }
 
@@ -290,7 +291,7 @@ unsigned char* encrypt(unsigned char* message ){
 
 int main(int argv, char** args)
 {
-    cout<<args[1]<<endl;
+    //cout<<args[1]<<endl;
     unsigned char* decrypted = encrypt((unsigned char*) args[1]);
     
     return 0;
