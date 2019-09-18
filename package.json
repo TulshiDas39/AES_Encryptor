@@ -1,19 +1,22 @@
 {
-  "name": "aes_encryptor",
+  "name": "electron-quick-start",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A minimal Electron application",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/TulshiDas39/AES_Encryptor.git"
-  },
-  "author": "tulshidas",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/TulshiDas39/AES_Encryptor/issues"
-  },
-  "homepage": "https://github.com/TulshiDas39/AES_Encryptor#readme"
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^5.0.4"
+  }
 }
