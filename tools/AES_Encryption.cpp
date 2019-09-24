@@ -278,8 +278,8 @@ unsigned char* encrypt(unsigned char* message ){
 
     //cout<<"Encrypted message:"<<endl;
     for(int i = 0; i < lenOfPaddedMessage; i++){
-        //print_hex(paddedMessage[i]);
-        cout<<paddedMessage[i];
+        print_hex(paddedMessage[i]);
+        //cout<<paddedMessage[i];
         cout<<" ";
     }
 

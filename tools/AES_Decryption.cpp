@@ -291,15 +291,13 @@ void aes_decrypt(unsigned char* message, unsigned char* key)
     }
 }
 
-
-int main()
-{
-    unsigned char message[48] =
-    {
-        0XB6, 0X4B, 0X27, 0XBB, 0X16, 0X15, 0XA6, 0XF5, 0X32, 0X18, 0X6C, 0XC5, 0XFA, 0X94, 0XB5, 0X5E,
-        0X5C, 0X54, 0XEA, 0X1B, 0XDF, 0X97, 0X1E, 0X3D, 0XE3, 0X1B, 0XFC, 0X02, 0X75, 0X22, 0X76, 0X52,
-        0XD5, 0X7B, 0XD5, 0X42, 0XBA, 0X0F, 0X68, 0X50, 0XCD, 0XFD, 0X59, 0XB8, 0XEB, 0X0E, 0X83, 0XD1
-    };
+void decrypt(unsigned char* message){
+    //     unsigned char message[48] =
+    // {
+    //     0XB6, 0X4B, 0X27, 0XBB, 0X16, 0X15, 0XA6, 0XF5, 0X32, 0X18, 0X6C, 0XC5, 0XFA, 0X94, 0XB5, 0X5E,
+    //     0X5C, 0X54, 0XEA, 0X1B, 0XDF, 0X97, 0X1E, 0X3D, 0XE3, 0X1B, 0XFC, 0X02, 0X75, 0X22, 0X76, 0X52,
+    //     0XD5, 0X7B, 0XD5, 0X42, 0XBA, 0X0F, 0X68, 0X50, 0XCD, 0XFD, 0X59, 0XB8, 0XEB, 0X0E, 0X83, 0XD1
+    // };
     unsigned char aes_key[16] =
     {
         1,  2,  3,  4,
@@ -333,6 +331,24 @@ int main()
     {
         cout<<paddedMessage[i];
     }
+}
 
+
+int main(int argv, char** args)
+{
+
+        unsigned char message[48] =
+    {
+        0XB6, 0X4B, 0X27, 0XBB, 0X16, 0X15, 0XA6, 0XF5, 0X32, 0X18, 0X6C, 0XC5, 0XFA, 0X94, 0XB5, 0X5E,
+        0X5C, 0X54, 0XEA, 0X1B, 0XDF, 0X97, 0X1E, 0X3D, 0XE3, 0X1B, 0XFC, 0X02, 0X75, 0X22, 0X76, 0X52,
+        0XD5, 0X7B, 0XD5, 0X42, 0XBA, 0X0F, 0X68, 0X50, 0XCD, 0XFD, 0X59, 0XB8, 0XEB, 0X0E, 0X83, 0XD1
+    };
+
+    // unsigned char* test = {
+    //     0X3E, 0XC0, 0X96, 0XEB, 0X82, 0X8D, 0X10, 0X1E, 0X00, 0XD3, 0X08, 0XD8, 0X15, 0X56, 0XE3, 0XAF
+    // }
+    
+    //decrypt((unsigned char*)args[1]);
+    decrypt(message);
     return 0;
 }
