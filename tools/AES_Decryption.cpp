@@ -335,7 +335,7 @@ void decrypt(unsigned char *message)
         aes_decrypt(paddedMessage + i, aes_key);
     }
 
-    cout << "Decrypted message:" << endl;
+    //cout << "Decrypted message:" << endl;
     for (int i = 0; i < lenOfPaddedMessage; i++)
     {
         cout << paddedMessage[i];
@@ -392,7 +392,7 @@ unsigned char strToChar( string str)
     ss >> x;
     // output it as a signed type
     //std::cout << static_cast<int>(x) << std::endl;
-    std::cout << static_cast<unsigned char>(x) << std::endl;
+   // std::cout << static_cast<unsigned char>(x) << std::endl;
     return static_cast<unsigned char>(x);
 }
 
@@ -422,13 +422,13 @@ int main(int argv, char **args)
     vector<string> hexValues = strToArry(args[1]);
     //strToArrHex(args[1]);
     //printArr(a);
-    printVect(hexValues);
+    //printVect(hexValues);
     vector<unsigned char> chars;
     for(unsigned i =0;i<hexValues.size();i++){
         chars.push_back(strToChar(hexValues.at(i)));
     }
-    cout<<"cout:"<<endl;
-    cout<<chars.size()<<endl;
+    // cout<<"cout:"<<endl;
+    // cout<<chars.size()<<endl;
 
     unsigned char* messege = new unsigned char[hexValues.size()];
 
@@ -436,7 +436,7 @@ int main(int argv, char **args)
         messege[i] = chars.at(i);
     }
 
-    cout<<strlen((const char *)messege)<<endl;
+    //cout<<strlen((const char *)messege)<<endl;
     decrypt(messege);
     //strToChar(hexValues);
     return 0;
