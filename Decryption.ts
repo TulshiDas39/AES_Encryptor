@@ -30,7 +30,7 @@ export class Decryption{
             }
             else if (stderr) console.log('stderr happened');
             else {
-                FileManager.data = stdout.toString();
+                FileManager.data= stdout.replace(/\r\n/g,"\n");
                 console.log('stdout:' + stdout);
             }
         });

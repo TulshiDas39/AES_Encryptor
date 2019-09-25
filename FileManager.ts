@@ -67,7 +67,8 @@ export class FileManager{
 
     private writeFile(filePath: string, data: string) {
         console.log('writing to file');
-        writeFileSync(filePath, data,{encoding:'utf8',});
+        
+        writeFileSync(filePath, data,{encoding:'utf8'});
         // var stream = createWriteStream(filePath, {flags: 'w'});
         // stream.write(data);
 
