@@ -1,6 +1,8 @@
 import { execFile } from "child_process";
 import { FileManager } from "./FileManager";
 import { ipcMain } from "electron";
+import { MainApp } from "./MainApp";
+import { sep } from "path";
 
 export class Decryption{
 
@@ -32,6 +34,11 @@ export class Decryption{
             else {
                 FileManager.data= stdout.replace(/\r\n/g,"\n");
                 console.log('stdout:' + stdout);
+
+                let fileName = this.fileManager.getDestinationPath();
+                fileName = fileName.substring(fileName.lastIndexOf(sep)+1);
+                console.log(fileName);
+                if(MainApp.myWindow)MainApp.myWindow.webContents.send('decrypted',fileName);
             }
         });
     }
