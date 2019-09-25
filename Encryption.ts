@@ -1,6 +1,8 @@
 import { execFile } from "child_process";
 import { ipcMain } from "electron";
 import { FileManager } from "./FileManager";
+import { MainApp } from "./MainApp";
+import { sep } from "path";
 
 export class Encryption {
 
@@ -34,6 +36,10 @@ export class Encryption {
             else {
                 console.log('stdout:' + stdout);
                 FileManager.data = stdout.toString();
+                let fileName = this.fileManager.getDestinationPath();
+                fileName = fileName.substring(fileName.lastIndexOf(sep)+1);
+                console.log(fileName);
+                if(MainApp.myWindow)MainApp.myWindow.webContents.send('encrypted',fileName);
             }
         });
     }

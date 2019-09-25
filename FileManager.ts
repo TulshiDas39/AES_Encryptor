@@ -74,4 +74,8 @@ export class FileManager{
 
 
     }
+
+    public getEncryptedFileName(){
+        this.getDestinationPath().substring(this.getDestinationPath().lastIndexOf(sep)+1);
+    }
 }

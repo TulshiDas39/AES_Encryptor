@@ -4,6 +4,7 @@ import { Encryption } from "./Encryption";
 import { rename, createReadStream, createWriteStream, unlink } from "fs";
 import { FileManager } from "./FileManager";
 import { Decryption } from "./Decryption";
+import { sep } from "path";
 
 export class MainApp {
 
@@ -25,7 +26,7 @@ export class MainApp {
         this.setSaveFileEvent();
         this.handleException();
     }
-    handleException() {
+    private handleException() {
         process.on('uncaughtException', ()=>{
             console.log('error happened');
         })
@@ -78,11 +79,17 @@ export class MainApp {
             console.log(filePaths);
 
             if(filePaths) {
+                console.log('has come');
                 this.fileManager.setFilePath(filePaths[0]);
                 console.log(this.fileManager.getFilePath());
-                
-                if(this.mainWindow){
-                    this.mainWindow.webContents.send('selected-file',filePaths[0]);
+                if(MainApp.myWindow){
+                    let fileName = filePaths[0].substring(filePaths[0].lastIndexOf(sep)+1);
+                    
+                    console.log(fileName);
+                    MainApp.myWindow.webContents.send('selected-file',fileName);
+                }
+                else{
+                    console.log('main window doesnot exist');
                 }
             }
 
