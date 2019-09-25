@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 #include <vector>
 using namespace std;
 
@@ -285,7 +285,7 @@ void aes_decrypt(unsigned char *message, unsigned char *key)
     }
 }
 
-void decrypt(unsigned char *message)
+void decrypt(unsigned char *message, int originalLen)
 {
     //     unsigned char message[48] =
     // {
@@ -313,7 +313,9 @@ void decrypt(unsigned char *message)
             16,
         };
 
-    int originalLen = strlen((const char *)message);
+    //int originalLen = strlen((const char *)message);
+    //cout<<"size of original message:";
+    //cout<<originalLen<<endl;
     int lenOfPaddedMessage = originalLen;
 
     if (lenOfPaddedMessage % 16)
@@ -336,8 +338,10 @@ void decrypt(unsigned char *message)
     }
 
     //cout << "Decrypted message:" << endl;
+    //cout<<lenOfPaddedMessage<<endl;
     for (int i = 0; i < lenOfPaddedMessage; i++)
     {
+        //cout<<i<<endl;
         cout << paddedMessage[i];
     }
 }
@@ -345,45 +349,47 @@ void decrypt(unsigned char *message)
 vector<string> strToArry(string str)
 {
     // Used to split string around spaces.
-    istringstream ss(str); 
+    istringstream ss(str);
     //string* arr;
-  
-    // Traverse through all words 
+
+    // Traverse through all words
     vector<string> data;
-    do { 
-        // Read a word 
-        string word; 
-        ss >> word; 
-  
-        // Print the read word 
-      //  cout << word << endl; 
-        
-       //arr[i] = word;
+    do
+    {
+        // Read a word
+        string word;
+        ss >> word;
+
+        // Print the read word
+        //coutcout << word << endl;
+
+        //arr[i] = word;
         //cout<< i<<endl;
         data.push_back(word);
 
-  
-        // While there is more to read 
-    } while (ss); 
-   // return strArr;
+        // While there is more to read
+    } while (ss);
+    // return strArr;
 
-   return data;
+    return data;
 }
 
 // printArr(string a*){
-    
+
 //     // for(int i=0;i<len;i++){
 //     //     cout<<a[i]<<endl;
 //     // }
 // }
 
-void printVect(vector<string> data){
-    for(unsigned i =0; i<data.size();i++){
-        cout<<data.at(i)<<endl;
+void printVect(vector<string> data)
+{
+    for (unsigned i = 0; i < data.size(); i++)
+    {
+        cout << data.at(i) << endl;
     }
 }
 
-unsigned char strToChar( string str)
+unsigned char strToChar(string str)
 {
     unsigned int x;
     std::stringstream ss;
@@ -392,7 +398,7 @@ unsigned char strToChar( string str)
     ss >> x;
     // output it as a signed type
     //std::cout << static_cast<int>(x) << std::endl;
-   // std::cout << static_cast<unsigned char>(x) << std::endl;
+    // std::cout << static_cast<unsigned char>(x) << std::endl;
     return static_cast<unsigned char>(x);
 }
 
@@ -419,25 +425,30 @@ int main(int argv, char **args)
     //decrypt((unsigned char*)args[1]);
     //decrypt(message);
     //string* a;
+    vector<unsigned char> chars;
     vector<string> hexValues = strToArry(args[1]);
+
     //strToArrHex(args[1]);
     //printArr(a);
     //printVect(hexValues);
-    vector<unsigned char> chars;
-    for(unsigned i =0;i<hexValues.size();i++){
+
+    for (unsigned i = 0; i < hexValues.size(); i++)
+    {
         chars.push_back(strToChar(hexValues.at(i)));
     }
     // cout<<"cout:"<<endl;
     // cout<<chars.size()<<endl;
+    //cout << "size of chars:";
+    //cout << chars.size() << endl;
+    unsigned char *messege = new unsigned char[hexValues.size()];
 
-    unsigned char* messege = new unsigned char[hexValues.size()];
-
-    for(unsigned i=0;i<chars.size();i++){
+    for (unsigned i = 0; i < chars.size(); i++)
+    {
         messege[i] = chars.at(i);
     }
 
     //cout<<strlen((const char *)messege)<<endl;
-    decrypt(messege);
+    decrypt(messege, chars.size());
     //strToChar(hexValues);
     return 0;
 }

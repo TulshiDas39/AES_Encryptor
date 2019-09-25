@@ -25,7 +25,7 @@ export class Decryption{
     private decrypt(){
         let data = this.fileManager.readFileContent(this.fileManager.getFilePath());
 
-        execFile('./tools/dec.exe', [data], (err: any, stdout: string, stderr: string) => {
+        execFile('./tools/dec2.exe', [data], (err: any, stdout: string, stderr: string) => {
             if (err) {
                 console.log('err happened');
                 console.log(err);

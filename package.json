@@ -1,12 +1,13 @@
 {
-  "name": "electron-quick-start",
+  "name": "encryptor-decryptor",
   "version": "1.0.0",
   "description": "AES encryptor decryptor",
   "main": "./build/main.js",
   "scripts": {
     "start": "npm run compile && npm run run",
     "compile": "tsc",
-    "run": "electron ."
+    "run": "electron .",
+    "dist": "build"
   },
   "repository": "https://github.com/TulshiDas39/AES_Encryptor",
   "keywords": [
@@ -20,6 +21,72 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "@types/node": "^12.7.5",
-    "electron": "^5.0.4"
+    "electron": "^5.0.4",
+    "electron-builder": "^21.2.0"
+  },
+  "build": {
+    "appId": "tulshi.st.decryptor",
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "identity": null,
+      "icon": "assets/icons/mac/icon.icns",
+      "category": "public.app-category.productivity"
+    },
+    "dmg": {
+      "background": "",
+      "icon": "icon.icns",
+      "iconSize": 100,
+      "window": {
+        "width": 744,
+        "height": 465
+      },
+      "contents": [
+        {
+          "x": 145,
+          "y": 257
+        },
+        {
+          "x": 400,
+          "y": 255,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "category": "productivity",
+      "icon": "assets/icons",
+      "packageCategory": "productivity",
+      "maintainer": "Tahlil bsse0803@iit.du.ac.bd",
+      "target": [
+        "AppImage"
+      ],
+      "synopsis": "A free youtube downloader"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": false,
+      "installerIcon": "icon.ico",
+      "uninstallerIcon": "icon.ico",
+      "license": "LICENSE.md",
+      "runAfterFinish": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "TulshiDas39",
+        "repo": "kr-youtube-downloader"
+      }
+    ],
+    "asar": false
   }
 }
