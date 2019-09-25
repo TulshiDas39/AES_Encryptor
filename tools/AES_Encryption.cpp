@@ -249,11 +249,8 @@ void print_hex(unsigned char x)
     if(x%16 >= 10)cout<<(char)((x%16 -10)+'A');
 }
 
-
-
-int main()
-{
-    unsigned char message[] = "This is a message we will encrypt with AES!";
+unsigned char* encrypt(unsigned char* message ){
+    //unsigned char message[] = "This is a message we will encrypt with AES!";
     unsigned char aes_key[16] =
     {
         1,  2,  3,  4,
@@ -279,11 +276,23 @@ int main()
         aes_encrypt(paddedMessage+i, aes_key);
     }
 
-    cout<<"Encrypted message:"<<endl;
+    //cout<<"Encrypted message:"<<endl;
     for(int i = 0; i < lenOfPaddedMessage; i++){
         print_hex(paddedMessage[i]);
+        //cout<<paddedMessage[i];
         cout<<" ";
     }
 
+    return paddedMessage;
+
+}
+
+
+
+int main(int argv, char** args)
+{
+    //cout<<args[1]<<endl;
+    unsigned char* decrypted = encrypt((unsigned char*) args[1]);
+    
     return 0;
 }

@@ -1,0 +1,25 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "AES encryptor decryptor",
+  "main": "./build/main.js",
+  "scripts": {
+    "start": "npm run compile && npm run run",
+    "compile": "tsc",
+    "run": "electron ."
+  },
+  "repository": "https://github.com/TulshiDas39/AES_Encryptor",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "electron": "^5.0.4"
+  }
+}
