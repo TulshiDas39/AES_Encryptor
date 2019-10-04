@@ -2,9 +2,11 @@
 #include <fstream>
 #include <string.h>
 #include <sstream>
-//#include <string>
+#include <string>
 
 using namespace std;
+
+std::ofstream outfile;
 
 unsigned char s_box[256] =
     {
@@ -237,17 +239,51 @@ void aes_encrypt(unsigned char *message, unsigned char *key)
     }
 }
 
+void write(string input)
+{
+    // std::ofstream out("output.txt");
+    // out << input;
+    // out.close();
+
+    //std::ofstream outfile;
+    //outfile.open("test.txt", std::ios_base::app);
+    outfile << input;
+}
+void appendChar(char c)
+{
+    outfile << c;
+}
+
 void print_hex(unsigned char x)
 {
     if (x / 16 < 10)
-        cout << (char)((x / 16) + '0');
+    {
+        char c = (char)((x / 16) + '0');
+        cout << c;
+        appendChar(c);
+    }
     if (x / 16 >= 10)
-        cout << (char)((x / 16 - 10) + 'A');
+    {
+        char c = (char)((x / 16 - 10) + 'A');
+        cout << c;
+        appendChar(c);
+    }
 
     if (x % 16 < 10)
-        cout << (char)((x % 16) + '0');
+    {
+        char c = (char)((x % 16) + '0');
+        cout << c;
+        appendChar(c);
+    }
+
     if (x % 16 >= 10)
-        cout << (char)((x % 16 - 10) + 'A');
+    {
+        char c = (char)((x % 16 - 10) + 'A');
+        cout << c;
+        appendChar(c);
+    }
+
+    outfile << " ";
 }
 
 unsigned char *encrypt(unsigned char *message)
@@ -306,22 +342,31 @@ unsigned char *encrypt(unsigned char *message)
     return paddedMessage;
 }
 
-std::string slurp()
+const unsigned char *slurp(std::ifstream &in)
 {
-
-    ifstream myReadFile;
-    myReadFile.open("test.txt");
-
     std::stringstream sstr;
-    sstr << myReadFile.rdbuf();
-    return sstr.str();
+    sstr << in.rdbuf();
+    //write(sstr.str());
+    return (const unsigned char *)sstr.str().c_str();
+}
+
+void deleteFile(char* path)
+{
+    if (remove(path) != 0)
+        perror("Error deleting file");
+    else
+        puts("File successfully deleted");
 }
 
 int main(int argv, char **args)
 {
-    //cout<<args[1]<<endl;
-    slurp();
+    deleteFile( (char* )"output.txt");
+    ifstream myReadFile(args[1]);
+    outfile.open("output.txt", std::ios_base::app);
+    const unsigned char *s = slurp(myReadFile);
     //unsigned char* decrypted = encrypt((unsigned char*) args[1]);
+    unsigned char *decrypted = encrypt((unsigned char *)s);
+    outfile.close();
 
     return 0;
 }

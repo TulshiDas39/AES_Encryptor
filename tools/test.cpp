@@ -12,12 +12,22 @@ std::string slurp(std::ifstream &in)
     return sstr.str();
 }
 
+void write(){
+    std::string input = "hello world";
+   // std::cin >> input;
+    std::ofstream out("output.txt");
+    out << input;
+    out.close();
+}
+
 int main()
 {
 
-    ifstream myReadFile;
-    myReadFile.open("test.txt");
-    slurp(myReadFile);
+    write();
+    // ifstream myReadFile;
+    // myReadFile.open("test.txt");
+    // string s = slurp(myReadFile);
+    // cout<<s;
 }
 
 
