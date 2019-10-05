@@ -276,8 +276,9 @@ void print_hex(unsigned char x)
     outfile << " ";
 }
 
-unsigned char *encrypt(unsigned char *message)
+void encrypt(unsigned char *message, int originalLen)
 {
+
     //unsigned char message[] = "This is a message we will encrypt with AES!";
     unsigned char aes_key[16] =
         {
@@ -299,7 +300,7 @@ unsigned char *encrypt(unsigned char *message)
             16,
         };
 
-    int originalLen = strlen((const char *)message);
+    // int originalLen = strlen((const char *)message);
     int lenOfPaddedMessage = originalLen;
 
     if (lenOfPaddedMessage % 16)
@@ -308,18 +309,26 @@ unsigned char *encrypt(unsigned char *message)
     }
 
     unsigned char *paddedMessage = new unsigned char[lenOfPaddedMessage];
+    
     for (int i = 0; i < lenOfPaddedMessage; i++)
     {
         if (i >= originalLen)
+        {
             paddedMessage[i] = 0;
+
+        }
         else
+        {
             paddedMessage[i] = message[i];
+        }
     }
+
 
     for (int i = 0; i < lenOfPaddedMessage; i += 16)
     {
         aes_encrypt(paddedMessage + i, aes_key);
     }
+
 
     //cout<<"Encrypted message:"<<endl;
     for (int i = 0; i < lenOfPaddedMessage; i++)
@@ -329,54 +338,72 @@ unsigned char *encrypt(unsigned char *message)
         cout << " ";
     }
 
-    return paddedMessage;
+    //return paddedMessage;
 }
 
-string slurp(std::ifstream &in)
+string readFile(std::ifstream &in)
 {
     std::stringstream sstr;
     sstr << in.rdbuf();
-    //write(sstr.str());
-    // outfile<<sstr.str();
-    // cout<<sstr.str();
     return sstr.str();
 }
 
-void deleteFile(char* path)
+void deleteFile(char *path)
 {
     if (remove(path) != 0)
         perror("Error deleting file");
     else
         puts("File successfully deleted");
-        
 }
 
-unsigned char* removeSpaces(string str){
-    long size = str.length();
-    long realSize = (size-2)/2;
-    unsigned char* actualStrArr = new unsigned char[realSize];
+string removeSpaces(string str)
+{
+    int size = str.length();
 
     string actualStr = "";
-    for (long i = 2; i < size; i+=2)
+
+    for (int i = 2; i < size; i += 2)
     {
         actualStr.push_back(str.at(i));
-        actualStrArr[i-2] = str.at(i);
     }
 
-   // outfile<<actualStr;
+    return actualStr;
+}
+
+unsigned char *getCharArr(string str)
+{
+    int size = str.length();
+    unsigned char *actualStrArr = new unsigned char[size];
+
+    for (int i = 0; i < size; i += 1)
+    {
+        actualStrArr[i] = str.at(i);
+    }
 
     return actualStrArr;
-    
+}
+
+bool isUTFChar(string s)
+{
+    if ((unsigned char)s.at(0) == 0XFF && (unsigned char)s.at(1) == 0XFE)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 int main(int argv, char **args)
 {
-    deleteFile( (char* )"output.txt");
+    deleteFile((char *)"encrypted.prt");
     ifstream myReadFile(args[1]);
-    outfile.open("output.txt", std::ios_base::app);
-    string s = slurp(myReadFile);
-    unsigned char* arr = removeSpaces(s);
-    unsigned char *decrypted = encrypt(arr);
+    outfile.open("encrypted.prt", std::ios_base::app);
+    string s = readFile(myReadFile);
+    string realStr;
+    if (isUTFChar(s)) s = removeSpaces(s);
+    int size = s.length();
+    unsigned char *arr = getCharArr(s);
+    encrypt(arr, size);
     outfile.close();
 
     return 0;

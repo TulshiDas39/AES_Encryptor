@@ -1,8 +1,11 @@
 #include <iostream>
 #include <string.h>
+#include <fstream>
 #include <bits/stdc++.h>
 #include <vector>
 using namespace std;
+
+std::ofstream outfile;
 
 unsigned char s_box[256] = {
     0X63, 0X7C, 0X77, 0X7B, 0XF2, 0X6B, 0X6F, 0XC5, 0X30, 0X01, 0X67, 0X2B, 0XFE, 0XD7, 0XAB, 0X76,
@@ -313,9 +316,6 @@ void decrypt(unsigned char *message, int originalLen)
             16,
         };
 
-    //int originalLen = strlen((const char *)message);
-    //cout<<"size of original message:";
-    //cout<<originalLen<<endl;
     int lenOfPaddedMessage = originalLen;
 
     if (lenOfPaddedMessage % 16)
@@ -343,6 +343,7 @@ void decrypt(unsigned char *message, int originalLen)
     {
         //cout<<i<<endl;
         cout << paddedMessage[i];
+        outfile << paddedMessage[i];
     }
 }
 
@@ -408,38 +409,39 @@ unsigned char strToChar(string str)
 //       cout<<"size: "+sizeof(arr)/sizeof(arr[0])<<endl;
 // }
 
+string slurp(std::ifstream &in)
+{
+    std::stringstream sstr;
+    sstr << in.rdbuf();
+    return sstr.str();
+}
+
+void deleteFile(char *path)
+{
+    if (remove(path) != 0)
+        perror("Error deleting file");
+    else
+        puts("File successfully deleted");
+}
+
 int main(int argv, char **args)
 {
 
-    //     unsigned char message[48] =
-    // {
-    //     0XB6, 0X4B, 0X27, 0XBB, 0X16, 0X15, 0XA6, 0XF5, 0X32, 0X18, 0X6C, 0XC5, 0XFA, 0X94, 0XB5, 0X5E,
-    //     0X5C, 0X54, 0XEA, 0X1B, 0XDF, 0X97, 0X1E, 0X3D, 0XE3, 0X1B, 0XFC, 0X02, 0X75, 0X22, 0X76, 0X52,
-    //     0XD5, 0X7B, 0XD5, 0X42, 0XBA, 0X0F, 0X68, 0X50, 0XCD, 0XFD, 0X59, 0XB8, 0XEB, 0X0E, 0X83, 0XD1
-    // };
+    deleteFile((char *)"decrypted.txt");
 
-    // unsigned char* test = {
-    //     0X3E, 0XC0, 0X96, 0XEB, 0X82, 0X8D, 0X10, 0X1E, 0X00, 0XD3, 0X08, 0XD8, 0X15, 0X56, 0XE3, 0XAF
-    // }
-
-    //decrypt((unsigned char*)args[1]);
-    //decrypt(message);
-    //string* a;
+    ifstream myReadFile(args[1]);
+    outfile.open("decrypted.txt", std::ios_base::app);
+    string s = slurp(myReadFile);
+    cout << s;
     vector<unsigned char> chars;
-    vector<string> hexValues = strToArry(args[1]);
-
-    //strToArrHex(args[1]);
-    //printArr(a);
-    //printVect(hexValues);
+    //vector<string> hexValues = strToArry(args[1]);
+    vector<string> hexValues = strToArry(s);
 
     for (unsigned i = 0; i < hexValues.size(); i++)
     {
         chars.push_back(strToChar(hexValues.at(i)));
     }
-    // cout<<"cout:"<<endl;
-    // cout<<chars.size()<<endl;
-    //cout << "size of chars:";
-    //cout << chars.size() << endl;
+
     unsigned char *messege = new unsigned char[hexValues.size()];
 
     for (unsigned i = 0; i < chars.size(); i++)
