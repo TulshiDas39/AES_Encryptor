@@ -1,5 +1,4 @@
-
 temp/
 build/
 node_modules/
-
+dist/
