@@ -1,0 +1,9 @@
+version: 1.0.0
+files:
+  - url: encryptor-decryptor-setup-1.0.0.exe
+    sha512: WNmk/yETW6j/qgpF7Dm0menPe6K2I8wjoL1osn9B4JMF/p6QDgp40BaWlssck+WPFLG08+M1+gWEeLdqk84J4g==
+    size: 53632024
+path: encryptor-decryptor-setup-1.0.0.exe
+sha512: WNmk/yETW6j/qgpF7Dm0menPe6K2I8wjoL1osn9B4JMF/p6QDgp40BaWlssck+WPFLG08+M1+gWEeLdqk84J4g==
+sha2: 0cbbd2d4edf3384fc20511e49a7128c5ab40493e3b2671e2a9d26f5106bef1ac
+releaseDate: '2019-10-05T10:25:53.635Z'

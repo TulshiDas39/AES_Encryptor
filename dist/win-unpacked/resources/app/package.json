@@ -1,0 +1,9 @@
+{
+  "name": "encryptor-decryptor",
+  "version": "1.0.0",
+  "description": "AES encryptor decryptor",
+  "main": "main.ts",
+  "repository": "https://github.com/TulshiDas39/AES_Encryptor",
+  "author": "GitHub",
+  "license": "CC0-1.0"
+}
