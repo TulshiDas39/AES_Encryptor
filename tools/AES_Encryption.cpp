@@ -239,16 +239,6 @@ void aes_encrypt(unsigned char *message, unsigned char *key)
     }
 }
 
-void write(string input)
-{
-    // std::ofstream out("output.txt");
-    // out << input;
-    // out.close();
-
-    //std::ofstream outfile;
-    //outfile.open("test.txt", std::ios_base::app);
-    outfile << input;
-}
 void appendChar(char c)
 {
     outfile << c;
@@ -342,12 +332,14 @@ unsigned char *encrypt(unsigned char *message)
     return paddedMessage;
 }
 
-const unsigned char *slurp(std::ifstream &in)
+string slurp(std::ifstream &in)
 {
     std::stringstream sstr;
     sstr << in.rdbuf();
     //write(sstr.str());
-    return (const unsigned char *)sstr.str().c_str();
+    // outfile<<sstr.str();
+    // cout<<sstr.str();
+    return sstr.str();
 }
 
 void deleteFile(char* path)
@@ -356,6 +348,25 @@ void deleteFile(char* path)
         perror("Error deleting file");
     else
         puts("File successfully deleted");
+        
+}
+
+unsigned char* removeSpaces(string str){
+    long size = str.length();
+    long realSize = (size-2)/2;
+    unsigned char* actualStrArr = new unsigned char[realSize];
+
+    string actualStr = "";
+    for (long i = 2; i < size; i+=2)
+    {
+        actualStr.push_back(str.at(i));
+        actualStrArr[i-2] = str.at(i);
+    }
+
+   // outfile<<actualStr;
+
+    return actualStrArr;
+    
 }
 
 int main(int argv, char **args)
@@ -363,9 +374,9 @@ int main(int argv, char **args)
     deleteFile( (char* )"output.txt");
     ifstream myReadFile(args[1]);
     outfile.open("output.txt", std::ios_base::app);
-    const unsigned char *s = slurp(myReadFile);
-    //unsigned char* decrypted = encrypt((unsigned char*) args[1]);
-    unsigned char *decrypted = encrypt((unsigned char *)s);
+    string s = slurp(myReadFile);
+    unsigned char* arr = removeSpaces(s);
+    unsigned char *decrypted = encrypt(arr);
     outfile.close();
 
     return 0;

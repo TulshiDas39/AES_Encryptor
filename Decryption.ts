@@ -24,11 +24,12 @@ export class Decryption{
 
     private decrypt(){
         let data = this.fileManager.readFileContent(this.fileManager.getFilePath());
+        console.log('encrypted data:'+data);
 
-        execFile('./tools/dec2.exe', [data], (err: any, stdout: string, stderr: string) => {
+        execFile('./tools/dec2.exe', [data], (err:Error|null, stdout: string, stderr: string) => {
             if (err) {
                 console.log('err happened');
-                console.log(err);
+                console.log(err.message);
             }
             else if (stderr) console.log('stderr happened');
             else {
