@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Hello World!</title>
+  <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+  <style>
+  .btn{
+    width: 100px;
+    background: green;
+    height: 30px;
+    border: none;
+  }
+  .btn:hover{
+    cursor: pointer;
+  }
+  </style>
+</head>
+
+<body>
+  <h1 style="text-align: center;">File Encryption and Decryption</h1>
+  <div style="margin: auto; text-align:center;">
+    <button id="selection" class="btn" style="margin: 10px;">select file</button>
+    <span id="selected-file"></span>
+    <span class="fa fa-spinner fa-spin" style="font-size:30px;color:red;display: none;"></span>
+  </div>
+  <div style="margin: auto; text-align:center;">
+    <button id="encrypt" class="btn action-btn" style="margin: 10px;display: none;">encrypt</button>
+    <button id="decrypt" class="btn action-btn" style="margin: 10px;display: none;">decrypt</button><br>
+    <button id="save" class="btn" style="margin: 10px;display: none;">Save</button>
+    <span id="result-file" style="display: none"></span>
+  </div>
+  <p id="alert" style="display: none;">Please select a file</p>
+
+ 
+
+
+
+
+  <!-- You can also require other files to run in this process -->
+
+  <script> var exports = {}; </script>
+  <script src="./index.js"></script>
+</body>
+
+</html>

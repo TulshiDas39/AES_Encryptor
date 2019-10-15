@@ -1,17 +1,19 @@
 import { execFile } from "child_process";
-import { ipcMain } from "electron";
+import { ipcMain,app } from "electron";
 import { FileManager } from "./FileManager";
 import { MainApp } from "./MainApp";
-import { sep } from "path";
+import { sep, join } from "path";
 
 export class Encryption {
 
     private fileManager = new FileManager();
+    private appPath = app.getAppPath();
     constructor() {
         this.init();
     }
 
     private init() {
+        console.log('appPath:'+this.appPath);
         this.setEncyptEvent();
     }
 
@@ -28,8 +30,10 @@ export class Encryption {
         //let data = this.fileManager.readFileContent(this.fileManager.getFilePath());
         
         console.log(this.fileManager.getFilePath());
+        let executable = join(this.appPath,'tools','enc.exe');
+        console.log('executable:'+executable);
 
-        execFile('./tools/enc.exe', [filePath], (err: Error|null, stdout: string, stderr: string) => {
+        execFile(executable, [filePath], (err: Error|null, stdout: string, stderr: string) => {
             if (err) {
                 console.log('err happened');
                 console.log(err.message);

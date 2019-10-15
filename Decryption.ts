@@ -1,12 +1,13 @@
 import { execFile } from "child_process";
 import { FileManager } from "./FileManager";
-import { ipcMain } from "electron";
+import { ipcMain, app } from "electron";
 import { MainApp } from "./MainApp";
-import { sep } from "path";
+import { sep, join } from "path";
 
 export class Decryption{
 
     private fileManager = new FileManager();
+    private appPath = app.getAppPath();
     constructor(){
         this.init();
     }
@@ -27,7 +28,10 @@ export class Decryption{
         //let data = this.fileManager.readFileContent(filePath);
         //console.log('encrypted data:'+data);
 
-        execFile('./tools/dec.exe', [filePath], (err:Error|null, stdout: string, stderr: string) => {
+        let executable = join(this.appPath,'tools','dec.exe');
+        console.log('executable:'+executable);
+
+        execFile(executable, [filePath], (err:Error|null, stdout: string, stderr: string) => {
             if (err) {
                 console.log('err happened');
                 console.log(err.message);
