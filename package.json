@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/node": "^12.7.5",
     "electron": "^5.0.4",
-    "electron-builder": "^19.20.1"
+    "electron-builder": "^23.6.0"
   },
   "build": {
     "appId": "tulshi.st.decryptor",
